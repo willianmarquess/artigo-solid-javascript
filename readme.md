@@ -477,6 +477,12 @@ Seria interessante se pudéssemos desenvolver uma aplicação que utilize todos 
 
 Obrigado pela leitura, até mais!
 
+Referências: 
+
+MARTIN, Robert. Arquitetura Limpa. Alta Books. 2019.
+
+<img src="https://images-na.ssl-images-amazon.com/images/I/815d9tE7jSL.jpg" width="100" height="150">
+
 
 
 
