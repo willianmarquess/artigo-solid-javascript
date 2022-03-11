@@ -2,13 +2,13 @@
 
 A quem diga que os princípios de SOLID podem somente ser aplicados em linguagens puramente orientadas a objetos como: Java, C#, C++, etc.
 
-Segundo o próprio Uncle Bob (Robert C. Martin) no livro Arquitetura Limpa: Os princípios SOLID nos dizem como organizar as funções, estruturas de dados, classes e também como esses artefatos devem ser interconectados. O uso da palavra "classe" não implica que esses princípios sejam aplicados apenas em linguagens e softwares orientados a objetos, em definição uma classe é apenas um agrupamento acoplado de funções, dados e os princípios de SOLID se aplicam a esses agrupamentos.
+Segundo Uncle Bob (Robert C. Martin) no livro Arquitetura Limpa: Os princípios SOLID nos dizem como organizar as funções, estruturas de dados, classes e também como esses artefatos devem ser interconectados. O uso da palavra "classe" não implica que esses princípios sejam aplicados apenas em linguagens e softwares orientados a objetos, em definição uma classe é apenas um agrupamento acoplado de funções, dados e os princípios de SOLID se aplicam a esses agrupamentos.
 
 ## Javascript é orientado a objetos?
 
 Javascript é uma linguagem multiparadigma, conhecida por ser orientada a Protótipos, e pode funcionar como linguagem procedural, orientada a objetos e também como linguagem funcional.
 
-A partir da especificação ECMAScript 2015 (ES6) foram introduzidas algumas syntax sugar (açucar de sintaxe) no javascript que auxiliam no uso clássico de orientação a objetos, como, por exemplo a introdução da palavra reservada "class" (entre outras features) para a definição de classes. 
+A partir da especificação ECMAScript 2015 (ES6) foram introduzidas algumas syntax sugar (açucar de sintaxe) no javascript que auxiliam no uso clássico da orientação a objetos, como, por exemplo a introdução da palavra reservada "class" (entre outras features) para a definição de classes. 
 
 ## Objetivos do SOLID
 
