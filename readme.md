@@ -12,9 +12,9 @@ A partir da especificação ECMAScript 2015 (ES6) foram introduzidas algumas *sy
 
 ## Objetivos do SOLID
 
-- Software que tolere mudanças;
-- Software que sejam fáceis de entender;
-- Software que sejam a base de componentes reutilizaveis;
+- Desenvolver Softwares que tolerem mudanças;
+- Desenvolver Softwares que sejam fáceis de entender;
+- Desenvolver Softwares que sejam a base de componentes reutilizaveis;
 
 ## Vamos começar?
 
