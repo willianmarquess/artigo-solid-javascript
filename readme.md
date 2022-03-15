@@ -1,4 +1,4 @@
-## Princípios do S.O.L.I.D em Javascript Moderno
+## Princípios S.O.L.I.D em Javascript Moderno
 
 A quem diga que os princípios de SOLID podem somente ser aplicados em linguagens puramente orientadas a objetos como: Java, C#, C++, etc.
 
