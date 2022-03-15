@@ -2,13 +2,13 @@
 
 A quem diga que os princípios de SOLID podem somente ser aplicados em linguagens puramente orientadas a objetos como: Java, C#, C++, etc.
 
-Segundo Uncle Bob (Robert C. Martin) no livro Arquitetura Limpa: Os princípios SOLID nos dizem como organizar as funções, estruturas de dados, classes e também como esses artefatos devem ser interconectados. O uso da palavra "classe" não implica que esses princípios sejam aplicados apenas em linguagens e softwares orientados a objetos, em definição uma classe é apenas um agrupamento acoplado de funções, dados e os princípios de SOLID se aplicam a esses agrupamentos.
+Segundo Uncle Bob (Robert C. Martin) no livro Arquitetura Limpa: Os princípios SOLID tem como objetivo organizar: funções, estruturas de dados, classes e como esses artefatos devem ser interconectados. O uso da palavra "classe" não implica que esses princípios sejam aplicados apenas em linguagens e softwares orientados a objetos, em definição uma classe é apenas um agrupamento de funções e dados, e é justamente nesse agrupamento que os princípios de SOLID se aplicam.
 
 ## Javascript é orientado a objetos?
 
-Javascript é uma linguagem multiparadigma, conhecida por ser orientada a Protótipos, e pode funcionar como linguagem procedural, orientada a objetos e também como linguagem funcional.
+Javascript é uma linguagem multiparadigma, conhecida por ser orientada a Protótipos, que pode funcionar como: linguagem procedural, orientada a objetos e também como linguagem funcional.
 
-A partir da especificação ECMAScript 2015 (ES6) foram introduzidas algumas syntax sugar (açucar de sintaxe) no javascript que auxiliam no uso clássico da orientação a objetos, como, por exemplo a introdução da palavra reservada "class" (entre outras features) para a definição de classes. 
+A partir da especificação ECMAScript 2015 (ES6) foram introduzidas algumas *syntax sugar* (açucar de sintaxe) que auxiliam no uso clássico da orientação a objetos, como por exemplo a introdução da palavra reservada "class" (entre outras features) para a definição de classes. 
 
 ## Objetivos do SOLID
 
@@ -22,7 +22,7 @@ A partir da especificação ECMAScript 2015 (ES6) foram introduzidas algumas syn
 
 "A class should have one, and only one, reason to change"
 
-O SRP (Princípio da responsabilidade única), uma entre várias interpretações diz que "uma classe deve ter uma única responsabilidade", vejamos esse princípio sendo violado na prática:
+O SRP (Princípio da responsabilidade única), vamos seguir a seguinte interpretação: "uma classe deve ter uma única responsabilidade". Vejamos esse princípio sendo violado na prática:
 
 ```javascript
 class Player {
@@ -49,14 +49,17 @@ class Player {
 }
 ```
 
-A implementação da classe "Player" está violando o princípio do SRP, pois está implementando funcionalidades de acesso ao banco de dados, esse acesso ao banco de dados não deve ser responsabilidade de uma classe que representa um modelo de dados, que deveria apenas cuidar dos modelos de dados e regras de negócio relativas a ela mesma.
+A implementação da classe "Player" está violando o princípio do SRP, pois está implementando funcionalidades de acesso ao banco de dados, esse acesso ao banco de dados não deve ser responsabilidade de uma classe que deveria ter apenas representar dados (em algumas abordagens arquiteturais também pode conter regras de negócio).
 
 ## 1 - Single Responsability Principle - Solução
 
-Existem várias abordagens que seriam válidas para aplicar o SRP de maneira correta na classe "Player", uma delas seria separar as responsabilidades em duas classes distintas, uma classe "Player" é apenas responsável por representar os dados de uma entidade (poderia ter regras de negócio também), e uma classe "PlayerRepository" que fica responsável por acessar e realizar operações no banco de dados da aplicação.
+Existem várias abordagens que seriam válidas para aplicar o SRP de maneira correta na classe "Player", uma delas seria separar as responsabilidades em duas classes distintas. 
+Podemos criar então uma classe "Player" que é responsável por representar os dados de uma entidade, e a classe "PlayerRepository" que fica responsável por acessar e realizar operações no banco de dados da aplicação.
 
 - A classe "Player" tem apenas a responsabilidade de representar o modelo de dados do player;
 - A classe "PlayerRepository" tem apenas a responsabilidade de acessar e realizar operações junto ao banco de dados da aplicação.
+
+Segue abaixo a implementação da solução:
 
 ```javascript
 class Player {
@@ -89,9 +92,9 @@ class PlayerRepository {
 
 "Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification"
 
-O OCP diz que, um artefato de software deve ser extensível sem que isso modifique o comportamento original deste artefato
+O OCP diz que, um artefato de software deve ser extensível sem que isso modifique o comportamento original deste artefato.
 
-Quando falamos de artefato, estamos fazendo uma referência a: classes, módulos, funções, etc.
+Obs: Quando falamos de artefato, estamos fazendo uma referência a: classes, módulos, funções, etc.
 
 Vamos ver um exemplo que viola esse princípio:
 
@@ -119,17 +122,18 @@ class Payment {
 }
 ```
 
-Temos a classe Payment, com a função "calcPayment" que recebe o método de pagamento e o valor para realizar o cálculo final do pagamento, porém realiza o cálculo se baseando no método de pagamento, e caso o sistema passe a ter um novo método de pagamento, teriamos que modificar o comportamento dessa função para cada nova forma de pagamento adicionada, e isso viola o OCP.
+Temos a classe Payment, com a função "calcPayment" que recebe como parâmetro: método de pagamento e valor. 
+Porém para realizar o cálculo, a função se baseia no método de pagamento. Tá, mas qual o problema? Bom, vamos imaginar que agora a função também tenha que calcular pagamentos realizados com Pix, nesse caso teremos que modificar a implementação original, adicionando mais um CASE no bloco SWITCH, além de adicionar a implementação do novo cálculo. E essa modificação viola o OCP, pois estamos MODIFICANDO o comportamento original da função "calcPayment".
 
 ## 2 - Open Close Principle - Solução
 
-Para implementar o OCP corretamente, vamos deixar a classe Payment como uma superclasse, e ao invés de implementar novas funcionalidades nessa classe, devemos utilizar o conceito de herança para tornar a classe Payment extensivel.
+Para implementar o OCP corretamente, podemos deixar a classe Payment como uma superclasse, e ao invés de implementar novas funcionalidades nessa classe, devemos utilizar o conceito de herança para tornar a classe Payment extensível.
 
-Portanto, para cada nova forma de pagamento, devemos que criar uma classe que herdará as características da superclasse Payment, e deverá usar o conceito de polimorfismo para sobreescrever a função de cálculo do pagamento de acordo com suas regras específicas.
+Portanto, para cada nova forma de pagamento, devemos que criar uma classe que herdará as características da superclasse Payment, e deverá usar o conceito de polimorfismo para sobreescrever a função de cálculo do pagamento de acordo com suas regras específicas (cada pagamento pode escrever sua própria lógica sem interferir no comportamento original).
 
 - A classe "Payment" não terá mais o comportamento modificado;
 - A classe "Payment" agora é extensível;
-- Cada novo método de pagamento poderá realizar a sobreescrita da função que realiza o cálculo final do pagamento; 
+- Cada novo método de pagamento deverá ter sua própria classe e extender  poderá realizar a sobreescrita da função que realiza o cálculo final do pagamento; 
 
 ``` Javascript
 class Payment {
@@ -229,7 +233,7 @@ class Bike extends Transport{
 
 No exemplo acima temos a superclasse "Transport", que representa meios de transporte, temos também duas subclasses "Car" (Carro) e "Bike" (Bicicleta) que extendem as características da classe "Transport" (então, podemos dizer que: bike e car são transport), porém ao afirmar que "Bike" é um "Transport", assim como a classe "Car", temos uma inconsistência, pois na nossa implementação "Transport" possui uma característica chamada "engine" (motor), e essa característica é passada por herança para todas as subclasses, e ao olharmos atentamente para a classe "Bike" percebemos que a mesma não deve possuir a propriedade "engine" e nem a funcionalidade "startEngine", pois uma bicicleta por padrão não possui um motor. 
 
-Então nesse contexto "Bike" não pode substituir todas as características e funcionalidades de "Transporte", então estamos violando o LSP.
+Nesse contexto "Bike" não pode substituir todas as características e funcionalidades de "Transporte", então estamos violando o LSP.
 
 Como podemos resolver este problema?
 
@@ -403,13 +407,13 @@ class Snes extends ClassicVideoGame {
 ```
 Para resolver o problema de violação do ISP, devemos criar uma segregação de interfaces, ou seja, criar interfaces específicas para contextos específicos. Na nossa solução agora temos duas interfaces distintas: "ModernVideoGame" com características específicas de video games modernos e "ClassicVideoGame" com características específicas de video games antigos. Além disso, temos as implementações das interfaces conforme o contexto: "Ps4" e "Ps5" implementam "ModernVideoGame" e "Snes" implementa "ClassicVideoGame".
 
-Obs: O exemplo utilizado poderia ser ainda mais específico, utilizando mais abstrações, lembrando, é apenas um exemplo para ajudar a melhor absorvição do conceito.
+Obs: O exemplo utilizado poderia ser ainda mais específico, utilizando mais abstrações, lembrando, é apenas um exemplo para ajudar a melhor obsorção do conceito.
 
 ## 5 - Dependency Inversion Principle
 
 "High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions."
 
-Este princípio procura aumentar o desacoplamento entre módulos do sistema, onde módulos que sejam de alto ou baixo nível não devem depender de implementações, mas sim de abstrações.
+Este princípio procura aumentar o desacoplamento entre módulos do sistema, onde módulos de alto ou baixo nível não devem depender de implementações, mas sim de abstrações.
 
 Vamos analisar o código abaixo: 
 
@@ -440,7 +444,7 @@ class PlayerService {
 }
 ```
 
-A classe "PlayerService" possui algumas funções que utilizam uma implementação da classe "PlayerRepository", então a classe "PlayerService" está dependendo de uma implementação da classe "PlayerRepository".
+A classe "PlayerService" possui algumas funções que utilizam uma implementação da classe "PlayerRepository", então a classe "PlayerService" está dependendo de uma implementação da classe "PlayerRepository", e isso viola o DIP.
 
 ## 5 - Dependency Inversion Principle - Solução
 
