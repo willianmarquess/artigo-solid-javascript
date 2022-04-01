@@ -475,7 +475,7 @@ class PlayerService {
 }
 ```
 
-A solução foi inverter a dependência, agora a classe "PlayerService" não depende diretamente de uma implementação da classe "PlayerRepository". A classe agora recebe como parâmetro no seu construtor uma instância da classe "PlayerRepository", retiramos a dependência entre elas e consequentemente tiramos o acoplamento.
+A solução foi inverter a dependência, agora a classe "PlayerService" não depende diretamente de uma implementação da classe "PlayerRepository". A classe agora recebe como parâmetro no seu construtor apenas uma referencia a uma interface que representa o "PlayerRepository", note que a classe "PlayerService" não conhece a implementação de "PlayerRepository", assim retiramos a dependência entre elas e consequentemente diminuimos o acoplamento.
 
 Seria interessante se pudéssemos desenvolver uma aplicação que utilize todos esses conceitos, mas isso fica para o próximo capítulo.
 
