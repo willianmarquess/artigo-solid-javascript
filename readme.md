@@ -41,9 +41,9 @@ class Player {
         return dbInstance.findAll();
     }
 
-    findById(){
+    findById(id){
         const dbInstance = new DbInstance();
-        return dbInstance.findById();
+        return dbInstance.findById(id);
     }
     
 }
@@ -81,9 +81,9 @@ class PlayerRepository {
         return dbInstance.findAll();
     }
 
-    findById() {
+    findById(id) {
         const dbInstance = new DbInstance();
-        return dbInstance.findById();
+        return dbInstance.findById(id);
     }
 }
 ```
