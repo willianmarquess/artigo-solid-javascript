@@ -53,8 +53,8 @@ A implementação da classe "Player" está violando o princípio do SRP, pois es
 
 ## 1 - Single Responsability Principle - Solução
 
-Existem várias abordagens que seriam válidas para aplicar o SRP de maneira correta na classe "Player", uma delas seria separar as responsabilidades em duas classes distintas. 
-Podemos criar então uma classe "Player" que é responsável por representar os dados de uma entidade, e a classe "PlayerRepository" que fica responsável por acessar e realizar operações no banco de dados da aplicação.
+Existem várias abordagens que podem ser válidas para aplicar o SRP corretamente na classe "Player", uma delas seria separar as responsabilidades em duas classes distintas. 
+Podemos criar então a classe "Player" que é responsável por representar os dados de uma entidade, e a classe "PlayerRepository" que fica responsável por acessar e realizar operações no banco de dados da aplicação.
 
 - A classe "Player" tem apenas a responsabilidade de representar o modelo de dados do player;
 - A classe "PlayerRepository" tem apenas a responsabilidade de acessar e realizar operações junto ao banco de dados da aplicação.
