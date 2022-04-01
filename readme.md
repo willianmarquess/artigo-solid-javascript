@@ -6,7 +6,7 @@ Segundo Uncle Bob (Robert C. Martin) no livro Arquitetura Limpa: Os princípios 
 
 ## Javascript é orientado a objetos?
 
-Javascript é uma linguagem multiparadigma, conhecida por ser orientada a Protótipos, que pode funcionar como: linguagem procedural, orientada a objetos e também como linguagem funcional.
+Javascript é uma linguagem multiparadigma, conhecida por ser orientada a Protótipos, que pode funcionar utilizando: programação procedural, orientada a objetos e também programação funcional.
 
 A partir da especificação ECMAScript 2015 (ES6) foram introduzidas algumas *syntax sugar* (açucar de sintaxe) que auxiliam no uso clássico da orientação a objetos, como por exemplo a introdução da palavra reservada "class" (entre outras features) para a definição de classes. 
 
