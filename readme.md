@@ -37,13 +37,13 @@ class Player {
     }
 
     findAll(){
-        const dbInstance = new DbInstance();
-        return dbInstance.findAll();
+        const dbInstance = new DbInstance()
+        return dbInstance.findAll()
     }
 
     findById(id){
-        const dbInstance = new DbInstance();
-        return dbInstance.findById(id);
+        const dbInstance = new DbInstance()
+        return dbInstance.findById(id)
     }
     
 }
@@ -77,13 +77,13 @@ class Player {
 
 class PlayerRepository {
     findAll() {
-        const dbInstance = new DbInstance();
-        return dbInstance.findAll();
+        const dbInstance = new DbInstance()
+        return dbInstance.findAll()
     }
 
     findById(id) {
-        const dbInstance = new DbInstance();
-        return dbInstance.findById(id);
+        const dbInstance = new DbInstance()
+        return dbInstance.findById(id)
     }
 }
 ```
