@@ -20,9 +20,9 @@ A partir da especificação ECMAScript 2015 (ES6) foram introduzidas algumas *sy
 
 ## 1 - Single Responsability Principle
 
-"A class should have one, and only one, reason to change"
+"A class should have one, and only one, reason to change".
 
-O SRP (Princípio da responsabilidade única), vamos seguir a seguinte interpretação: "uma classe deve ter uma única responsabilidade". Vejamos esse princípio sendo violado na prática:
+Para o SRP (princípio da responsabilidade única), vamos seguir a seguinte interpretação: "uma classe deve ter uma única responsabilidade". Vejamos esse princípio sendo violado na prática:
 
 ```javascript
 class Player {
@@ -49,7 +49,7 @@ class Player {
 }
 ```
 
-A implementação da classe "Player" está violando o princípio do SRP, pois está implementando funcionalidades de acesso ao banco de dados, esse acesso ao banco de dados não deve ser responsabilidade de uma classe que deveria ter apenas representar dados (em algumas abordagens arquiteturais também pode conter regras de negócio).
+A implementação da classe "Player" está violando o princípio do SRP, pois está implementando funcionalidades de acesso ao banco de dados, esse acesso ao banco de dados não deve ser responsabilidade de uma classe que deveria apenas representar dados (em algumas abordagens arquiteturais também pode conter regras de negócio).
 
 ## 1 - Single Responsability Principle - Solução
 
@@ -57,7 +57,7 @@ Existem várias abordagens que podem ser válidas para aplicar o SRP corretament
 Podemos criar então a classe "Player" que é responsável por representar os dados de uma entidade, e a classe "PlayerRepository" que fica responsável por acessar e realizar operações no banco de dados da aplicação.
 
 - A classe "Player" tem apenas a responsabilidade de representar o modelo de dados do player;
-- A classe "PlayerRepository" tem apenas a responsabilidade de acessar e realizar operações junto ao banco de dados da aplicação.
+- A classe "PlayerRepository" tem a responsabilidade de acessar e realizar operações junto ao banco de dados da aplicação.
 
 Segue abaixo a implementação da solução:
 
@@ -90,7 +90,7 @@ class PlayerRepository {
 
 ## 2 - Open Close Principle
 
-"Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification"
+"Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification".
 
 O OCP diz que, um artefato de software deve ser extensível sem que isso modifique o comportamento original deste artefato.
 
@@ -122,7 +122,7 @@ class Payment {
 }
 ```
 
-Temos a classe Payment, com a função "calcPayment" que recebe como parâmetro: método de pagamento e valor. 
+Temos a classe Payment, com a função "calcPayment" que recebe como parâmetros: método de pagamento e valor. 
 Porém para realizar o cálculo, a função se baseia no método de pagamento. Tá, mas qual o problema? Bom, vamos imaginar que agora a função também tenha que calcular pagamentos realizados com Pix, nesse caso teremos que modificar a implementação original, adicionando mais um CASE no bloco SWITCH, além de adicionar a implementação do novo cálculo. E essa modificação viola o OCP, pois estamos MODIFICANDO o comportamento original da função "calcPayment".
 
 ## 2 - Open Close Principle - Solução
@@ -133,7 +133,7 @@ Portanto, para cada nova forma de pagamento, devemos que criar uma classe que he
 
 - A classe "Payment" não terá mais o comportamento modificado;
 - A classe "Payment" agora é extensível;
-- Cada novo método de pagamento deverá ter sua própria classe e extender  poderá realizar a sobreescrita da função que realiza o cálculo final do pagamento; 
+- Cada novo método de pagamento deverá ter sua própria classe e extender poderá realizar a sobreescrita da função que realiza o cálculo final do pagamento; 
 
 ``` Javascript
 class Payment {
@@ -231,7 +231,7 @@ class Bike extends Transport{
 }
 ```
 
-No exemplo acima temos a superclasse "Transport", que representa meios de transporte, temos também duas subclasses "Car" (Carro) e "Bike" (Bicicleta) que extendem as características da classe "Transport" (então, podemos dizer que: bike e car são transport), porém ao afirmar que "Bike" é um "Transport", assim como a classe "Car", temos uma inconsistência, pois na nossa implementação "Transport" possui uma característica chamada "engine" (motor), e essa característica é passada por herança para todas as subclasses, e ao olharmos atentamente para a classe "Bike" percebemos que a mesma não deve possuir a propriedade "engine" e nem a funcionalidade "startEngine", pois uma bicicleta por padrão não possui um motor. 
+No exemplo acima temos a superclasse "Transport", que representa meios de transporte, temos também duas subclasses "Car" (Carro) e "Bike" (Bicicleta) que extendem as características da classe "Transport" (então, podemos dizer que bike e car são transport), porém ao afirmar que "Bike" é um "Transport", assim como a classe "Car", temos uma inconsistência, pois na nossa implementação "Transport" possui uma característica chamada "engine" (motor), e essa característica é passada por herança para todas as subclasses, e ao olharmos atentamente para a classe "Bike" percebemos que a mesma não deve possuir a propriedade "engine" e nem a funcionalidade "startEngine", pois uma bicicleta por padrão não possui um motor. 
 
 Nesse contexto "Bike" não pode substituir todas as características e funcionalidades de "Transporte", então estamos violando o LSP.
 
@@ -407,7 +407,7 @@ class Snes extends ClassicVideoGame {
 ```
 Para resolver o problema de violação do ISP, devemos criar uma segregação de interfaces, ou seja, criar interfaces específicas para contextos específicos. Na nossa solução agora temos duas interfaces distintas: "ModernVideoGame" com características específicas de video games modernos e "ClassicVideoGame" com características específicas de video games antigos. Além disso, temos as implementações das interfaces conforme o contexto: "Ps4" e "Ps5" implementam "ModernVideoGame" e "Snes" implementa "ClassicVideoGame".
 
-Obs: O exemplo utilizado poderia ser ainda mais específico, utilizando mais abstrações, lembrando, é apenas um exemplo para ajudar a melhor obsorção do conceito.
+Obs: O exemplo utilizado poderia ser ainda mais específico, utilizando mais abstrações, lembrando, é apenas um exemplo para ajudar a melhor absorção do conceito.
 
 ## 5 - Dependency Inversion Principle
 
@@ -437,9 +437,9 @@ class PlayerService {
         return playerRepository.findAll()
     }
 
-    findById() {
+    findById(id) {
         const playerRepository = new PlayerRepository()
-        return playerRepository.findById()
+        return playerRepository.findById(id)
     }
 }
 ```
@@ -469,13 +469,13 @@ class PlayerService {
         return this.playerRepository.findAll()
     }
 
-    findById() {
-        return this.playerRepository.findById()
+    findById(id) {
+        return this.playerRepository.findById(id)
     }
 }
 ```
 
-A solução foi inverter a dependência, agora a classe "PlayerService" não depende diretamente de uma implementação da classe "PlayerRepository". A classe agora recebe como parâmetro no seu construtor apenas uma referencia a uma interface que representa o "PlayerRepository", note que a classe "PlayerService" não conhece a implementação de "PlayerRepository", assim retiramos a dependência entre elas e consequentemente diminuimos o acoplamento.
+A solução foi inverter a dependência, agora a classe "PlayerService" não depende diretamente de uma implementação da classe "PlayerRepository". A classe agora recebe como parâmetro no seu construtor apenas uma referência a uma interface que representa o "PlayerRepository", note que a classe "PlayerService" não conhece a implementação de "PlayerRepository", assim retiramos a dependência entre elas e consequentemente diminuimos o acoplamento.
 
 Seria interessante se pudéssemos desenvolver uma aplicação que utilize todos esses conceitos, mas isso fica para o próximo capítulo.
 
@@ -486,8 +486,3 @@ Referências:
 MARTIN, Robert. Arquitetura Limpa. Alta Books. 2019.
 
 <img src="https://images-na.ssl-images-amazon.com/images/I/815d9tE7jSL.jpg" width="100" height="150">
-
-
-
-
-
